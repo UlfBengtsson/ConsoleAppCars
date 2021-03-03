@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ConsoleAppCars
 {
-    class Car
+    public class Car
     {
         //If no access modifiers is present for a field/method/property, thay will all defualt to Private.
         string brand;
@@ -14,12 +14,23 @@ namespace ConsoleAppCars
         int maxSpeed;
         char[] regPlate;
 
-        public Car(string brand, string model,char[] regPlate, int maxSpeed)
+        public Car(string brand, string model, char[] regPlate, int maxSpeed)
         {
             this.brand = brand;
             this.model = model;
             this.regPlate = regPlate;
-            this.maxSpeed = maxSpeed;
+            MaxSpeedLimit = maxSpeed;
+        }
+
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value; }
+        }
+        public string Model
+        {
+            get { return model; }
+            set { model = value; }
         }
 
         /// <summary>
@@ -46,7 +57,20 @@ namespace ConsoleAppCars
         /// You can read up on how to use XML documentation tags in your C# code.
         /// https://docs.microsoft.com/en-us/dotnet/csharp/codedoc
         /// </remarks>
-        public int Speed { get; set; }
+        public int Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set
+            {
+                if (value <= maxSpeed)
+                {
+                    speed = value;
+                }
+            }
+        }
 
         /// <summary>
         /// The cars maximum possible speed.
@@ -64,7 +88,24 @@ namespace ConsoleAppCars
         /// <value>
         /// Get returns cars maximum speed possible.
         /// </value>
-        public int MaxSpeedLimit { get; set; }
+        public int MaxSpeedLimit
+        {
+            get
+            {
+                return maxSpeed;
+            }
+            set
+            {
+                if (value < 1)
+                {
+                    maxSpeed = 1;
+                }
+                else
+                {
+                    maxSpeed = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Registration plate for the car
@@ -87,13 +128,23 @@ namespace ConsoleAppCars
         /// </item>
         /// </list>
         /// </summary>
-        public string RegPlate { get; set; }
+        public string RegPlate
+        {
+            get
+            {
+                return RegPlateToString();
+            }
+            set
+            {
+                regPlate = value.ToCharArray();
+            }
+        }
 
 
         private string RegPlateToString()
         {
             StringBuilder reg = new StringBuilder();
-            
+
             foreach (var item in regPlate)
             {
                 reg.Append(item);
