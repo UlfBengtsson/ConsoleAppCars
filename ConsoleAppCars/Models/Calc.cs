@@ -25,6 +25,11 @@ namespace ConsoleAppCars
         //    return sum;
         //}
 
+        /// <summary>
+        /// Using the param (a.k.a. Varargs) is nice but do know it is slower/lower preformace.  
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns>total sum of array</returns>
         public static double Add(params double[] numbers)//varargs
         {
 
